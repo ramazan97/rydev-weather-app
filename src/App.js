@@ -123,8 +123,8 @@ const App = () => {
   const date = new Date();
 
   return (
-    <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-4 lg:px-0">
-      <div className="h-16 flex items-center justify-start pl-14  w-full    mb-8 ">
+    <div className="w-full min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-4 lg:px-0">
+      <div className="h-16 fixed top-0 left-0  flex items-center justify-start pl-14 w-full mb-8 ">
         <a href={"https://ry-portfolio-v2.vercel.app/"}>
           <h1 className="text-white text-4xl font-bold font-sofia ">
             ry<span className="text-red-500  ">.dev</span>{" "}
@@ -145,7 +145,7 @@ const App = () => {
           animate ? "animate-shake" : "animate-none"
         } h-16 bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] mt-4 mb-8 `}
       >
-        <div className="h-full relative flex items-center justify-between p-2 ">
+        <div className="h-full  relative flex items-center justify-between p-2 ">
           <input
             onChange={(e) => handleInput(e)}
             className="flex-1 bg-transparent outline-none placeholder:text-white text-white text-[15px] font-light pl-6 h-full "
