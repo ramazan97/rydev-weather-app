@@ -4,6 +4,12 @@ module.exports = {
     fontFamily: {
       primary: 'Poppins',
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "960px",
+      xl: "1200px",
+    },
     extend: {
       backgroundImage: {
         gradientBg: "url('/src/assets/img/bg.png')",
