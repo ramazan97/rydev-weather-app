@@ -26,7 +26,7 @@ const APIkey = "47e7d63485bf9cfea6ee22efaa3936ee";
 
 const App = () => {
   const [data, setData] = useState(null);
-  const [location, setLocation] = useState("Bucharest");
+  const [location, setLocation] = useState("bolu");
   const [inputValue, setInputValue] = useState("");
   const [animate, setAnimate] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,12 +34,13 @@ const App = () => {
   const handleInput = (e) => {
     setInputValue(e.target.value);
   };
+
   const handleSubmit = (e) => {
     if (inputValue !== "") {
       setLocation(inputValue);
     }
 
-    if (input.value === "") {
+    if (inputValue === "") {
       setAnimate(true);
 
       setTimeout(() => {
@@ -56,8 +57,7 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    // const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIkey}`;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIkey}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${APIkey}`;
 
     axios
       .get(url)
@@ -84,7 +84,7 @@ const App = () => {
   //loading
   if (!data) {
     return (
-      <div className="w-full h-screen bg-gradientBg bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center ">
+      <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center ">
         <div>
           <ImSpinner8 className="text-5xl animate-spin text-white" />
         </div>
@@ -93,6 +93,7 @@ const App = () => {
   }
 
   let icon;
+
   switch (data.weather[0].main) {
     case "Clouds":
       icon = <IoMdCloudy />;
@@ -101,27 +102,37 @@ const App = () => {
       icon = <BsCloudHaze2Fill />;
       break;
     case "Rain":
-      icon = <IoMdRainy />;
+      icon = <IoMdRainy className="text-cyan-500" />;
       break;
     case "Clear":
-      icon = <IoMdSnow />;
+      icon = <IoMdSunny className="text-yellow-300" />;
+      break;
+    case "Drizzle":
+      icon = <BsCloudDrizzleFill className="text-cyan-500" />;
       break;
     case "Snow":
-      icon = <IoMdSnow />;
+      icon = <IoMdSnow className="text-cyan-500" />;
       break;
     case "Thunderstorm":
       icon = <IoMdThunderstorm />;
       break;
-    case "Drizzle":
-      icon = <BsCloudDrizzleFill />;
-      break;
+
     default:
       break;
   }
   const date = new Date();
 
   return (
-    <div className="w-full h-screen bg-gradientBg bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-4 lg:px-0">
+    <div className="w-full h-full bg-gradient-to-r from-blue-500 to-purple-500 bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-4 lg:px-0">
+      <div className="h-16 flex items-center justify-start pl-14  w-full    mb-8 ">
+        <a href={"https://ry-portfolio-v2.vercel.app/"}>
+          <h1 className="text-white text-4xl font-bold font-sofia ">
+            ry<span className="text-red-500  ">.dev</span>{" "}
+          </h1>
+        </a>
+      </div>
+      {/* <div className="text-6xl">{icon} </div> */}
+
       {errorMsg && (
         <div className="w-full max-w-[90vw] lg:max-w-[450px] bg-pink-500 text-white absolute top-2 lg:top-10 p-4 capitalize rounded-md ">
           {`${errorMsg.response.data.message}`}{" "}
@@ -132,14 +143,14 @@ const App = () => {
       <form
         className={`${
           animate ? "animate-shake" : "animate-none"
-        } h-16 bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] mb-8 `}
+        } h-16 bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] mt-4 mb-8 `}
       >
         <div className="h-full relative flex items-center justify-between p-2 ">
           <input
-            onClick={(e) => handleInput(e)}
+            onChange={(e) => handleInput(e)}
             className="flex-1 bg-transparent outline-none placeholder:text-white text-white text-[15px] font-light pl-6 h-full "
             type="text"
-            placeholder="Search by city or country"
+            placeholder="Şehir ara..."
           />
 
           <button
@@ -150,6 +161,7 @@ const App = () => {
           </button>
         </div>
       </form>
+
       {/* card */}
       <div className="w-full max-w-[450px] bg-black/20 min-h-[584px] text-white backdrop-blur-[32px] rounded-[32px] px-6 py-12 ">
         {loading ? (
@@ -159,9 +171,10 @@ const App = () => {
         ) : (
           <div>
             <div className="flex items-center gap-x-5 ">
+              {/* icon */}
               <div className="text-[87px] ">{icon} </div>
               <div className="">
-                {" "}
+                {/* country name */}
                 <div className="text-2xl">
                   {data.name}, {data.sys.country}
                 </div>
@@ -172,15 +185,16 @@ const App = () => {
                 </div>
               </div>
             </div>
+
             {/* card body */}
             <div className="my-20">
-              <div className="flex items-center justify-center">
+              <div className="flex items-start justify-center">
                 {" "}
                 <div className="text-[144px] leading-none font-light ">
-                  {(parseInt(data.main.temp) / 33, 8)}
+                  {parseInt(data.main.temp)}
                 </div>
                 {/* celcius icon */}
-                <div className="text-4xl">
+                <div className="text-4xl  mt-4">
                   <TbTemperatureCelsius />
                 </div>
               </div>
@@ -209,7 +223,7 @@ const App = () => {
                   <div className="flex">
                     Feels like
                     <div className="flex ml-2">
-                      {(parseInt(data.main.feels_like) / 33, 8)}
+                      {parseInt(data.main.feels_like)}
                       <TbTemperatureCelsius />
                     </div>
                   </div>
@@ -230,10 +244,8 @@ const App = () => {
                     <BsWater />{" "}
                   </div>{" "}
                   <div className="flex">
-                    Huminity
-                    <div className="flex ml-2">
-                      {(parseInt(data.main.humunity) / 33, 8)}%
-                    </div>
+                    Humidity
+                    <div className="flex ml-2">{data.main.humidity}%</div>
                   </div>
                 </div>
               </div>{" "}
