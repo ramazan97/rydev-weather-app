@@ -165,8 +165,8 @@ const App = () => {
       {/* card */}
       <div className="w-full max-w-[450px] bg-black/20 min-h-[584px] text-white backdrop-blur-[32px] rounded-[32px] px-6 py-12 ">
         {loading ? (
-          <div className="w-full h-full flex justify-center items-center">
-            <ImSpinner8 className="text-white text-5xl" />
+          <div className="w-full max-w-[450px] min-h-[584px]  h-full flex justify-center items-center">
+            <ImSpinner8 className="text-5xl animate-spin text-white" />
           </div>
         ) : (
           <div>
