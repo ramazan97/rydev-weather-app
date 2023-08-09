@@ -84,7 +84,7 @@ const App = () => {
   //loading
   if (!data) {
     return (
-      <div className="w-full h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center ">
+      <div className="w-full h-screen bg-gradient-to-r from-blue-500 to-purple-500 bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center ">
         <div>
           <ImSpinner8 className="text-5xl animate-spin text-white" />
         </div>
