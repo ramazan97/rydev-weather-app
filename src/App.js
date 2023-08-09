@@ -126,7 +126,7 @@ const App = () => {
     <div className="w-full min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center px-4 lg:px-0">
       <div className="h-16 fixed top-0 left-0  flex items-center justify-start pl-14 w-full mb-8 ">
         <a href={"https://ry-portfolio-v2.vercel.app/"}>
-          <h1 className="text-white text-4xl font-bold font-sofia ">
+          <h1 className="text-white text-4xl font-bold font-fugaz ">
             ry<span className="text-red-500  ">.dev</span>{" "}
           </h1>
         </a>
